@@ -59,8 +59,12 @@ class CitySearchVC: UIViewController {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "toForecast" {
-            if let forecastVC = segue.destination as? ForecastVC {
-                forecastVC.forecast = forecast
+            if let navigationController = segue.destination as? UINavigationController {
+                if let forecastVC = navigationController.topViewController as? ForecastVC {
+                    forecastVC.forecast = forecast
+                    let city = cityField.text?.capitalized
+                    forecastVC.navigationItem.title = "\(city ?? "Random") Forecast"
+                }
             }
         }
     }
