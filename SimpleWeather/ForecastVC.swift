@@ -56,6 +56,18 @@ class ForecastVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
         let day = forecast[indexPath.row]
         let weather = day["weather"] as! [[String: Any]]
         let innerWeather = weather[0]
+        
+        // Get weather icon
+        let iconID = innerWeather["icon"] as! String
+        let urlString = "https://openweathermap.org/img/wn/\(iconID)@2x.png"
+        let weatherIconURL = URL(string: urlString)
+        let data = try? Data(contentsOf: weatherIconURL!)
+        
+        // Set weather icon
+        if let imageData = data {
+            cell.weatherIcon.image = UIImage(data: imageData)
+        }
+        
         let description = innerWeather["description"] as! String
         cell.weatherDescriptionLabel.text = description
         
