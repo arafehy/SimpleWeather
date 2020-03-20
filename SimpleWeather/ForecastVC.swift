@@ -12,6 +12,7 @@ class ForecastVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     var forecast = [[String: Any]]()
     @IBOutlet weak var tableView: UITableView!
+    var index = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -47,13 +48,14 @@ class ForecastVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+        return 5
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "DayCell") as! DayCell
         
-        let day = forecast[indexPath.row]
+        let day = forecast[index]
+        index += 8
         let weather = day["weather"] as! [[String: Any]]
         let innerWeather = weather[0]
         
