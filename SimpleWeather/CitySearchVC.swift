@@ -25,6 +25,20 @@ class CitySearchVC: UIViewController {
     
     func getWeather() {
         let city = cityField.text
+        guard !city!.isEmpty else {
+            // Show user alert that city must be provided
+            let alertController = UIAlertController(title: "No City Provided",
+                                                    message: "Please enter a valid city.",
+                                                    preferredStyle: .alert)
+            
+            // Create an OK action
+            let OKAction = UIAlertAction(title: "OK", style: .default)
+            // Add the OK action to the alert controller
+            alertController.addAction(OKAction)
+            
+            self.present(alertController, animated: true)
+            return
+        }
         
         var components = URLComponents()
         components.scheme = "https"
@@ -45,8 +59,22 @@ class CitySearchVC: UIViewController {
             }
             else if let data = data {
                 let dataDictionary = try! JSONSerialization.jsonObject(with: data, options: []) as! [String: Any]
-                self.forecast = dataDictionary["list"] as! [[String: Any]]
-                self.performSegue(withIdentifier: "toForecast", sender: nil)
+                if let forecastDictionary = dataDictionary["list"] as? [[String: Any]] {
+                    self.forecast = forecastDictionary
+                    self.performSegue(withIdentifier: "toForecast", sender: nil)
+                } else {
+                    // Show user alert that city provided was not found
+                    let alertController = UIAlertController(title: "City Not Found",
+                                                            message: "\(city!) not found. Please enter a valid city.",
+                                                            preferredStyle: .alert)
+                    
+                    // Create an OK action
+                    let OKAction = UIAlertAction(title: "OK", style: .default)
+                    // Add the OK action to the alert controller
+                    alertController.addAction(OKAction)
+                    
+                    self.present(alertController, animated: true)
+                }
             }
         }
         task.resume()
