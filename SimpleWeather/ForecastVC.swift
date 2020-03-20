@@ -68,9 +68,11 @@ class ForecastVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
             cell.weatherIcon.image = UIImage(data: imageData)
         }
         
+        // Get weather description
         let description = innerWeather["description"] as! String
         cell.weatherDescriptionLabel.text = description
         
+        // Get date
         let dateTime = day["dt_txt"] as? String
         let date = dateTime?.prefix(10)
         
