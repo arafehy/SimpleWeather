@@ -11,6 +11,7 @@ import UIKit
 class CitySearchVC: UIViewController {
     
     @IBOutlet weak var cityField: UITextField!
+    @IBOutlet weak var submitButton: UIButton!
     
     private let openWeatherAPIKey = "5138c72c4ed19a1cc943e54e2b2ddb86"
     
@@ -19,8 +20,7 @@ class CitySearchVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        //    private let openWeatherBaseURL = api.openweathermap.org/data/2.5/forecast?q={city name}&appid={your api key}
-        
+        submitButton.layer.cornerRadius = 4
     }
     
     func getWeather() {
