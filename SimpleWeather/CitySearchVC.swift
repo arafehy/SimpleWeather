@@ -33,7 +33,6 @@ class CitySearchVC: UIViewController {
         components.queryItems = [
             URLQueryItem(name: "q", value: city),
             URLQueryItem(name: "units", value: "metric"),
-//            URLQueryItem(name: "cnt", value: "10"),
             URLQueryItem(name: "appid", value: openWeatherAPIKey)
         ]
         
