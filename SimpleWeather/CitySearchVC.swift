@@ -20,6 +20,8 @@ class CitySearchVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        
+        // Round corners for submit button
         submitButton.layer.cornerRadius = 4
     }
     
@@ -40,6 +42,7 @@ class CitySearchVC: UIViewController {
             return
         }
         
+        // Build the OpenWeatherAPI URL with components
         var components = URLComponents()
         components.scheme = "https"
         components.host = "api.openweathermap.org"
@@ -50,7 +53,10 @@ class CitySearchVC: UIViewController {
             URLQueryItem(name: "appid", value: openWeatherAPIKey)
         ]
         
+        // Get final OpenWeatherAPI URL
         let url = components.url
+        
+        // Make request to API
         let request = URLRequest(url: url!, cachePolicy: .reloadIgnoringLocalCacheData, timeoutInterval: 10)
         let session = URLSession(configuration: .default, delegate: nil, delegateQueue: OperationQueue.main)
         let task = session.dataTask(with: request) { (data, response, error) in

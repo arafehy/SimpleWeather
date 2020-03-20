@@ -12,7 +12,7 @@ class ForecastVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     var forecast = [[String: Any]]()
     @IBOutlet weak var tableView: UITableView!
-    var index = 0
+    var index = 0   // Used to get weather forecast for each day when setting up each table view cell
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -20,7 +20,6 @@ class ForecastVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
         tableView.dataSource = self
         tableView.delegate = self
         // Do any additional setup after loading the view.
-//        print(forecast)
     }
     
     func getDayOfWeek(_ date:String) -> String {
@@ -54,6 +53,7 @@ class ForecastVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "DayCell") as! DayCell
         
+        // Since API returns weather every 3 hours, I am retrieving the weather every 24 hours from the first entry in the dictionary
         let day = forecast[index]
         index += 8
         let weather = day["weather"] as! [[String: Any]]
@@ -84,15 +84,5 @@ class ForecastVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
         
         return cell
     }
-    
-    /*
-     // MARK: - Navigation
-     
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-     // Get the new view controller using segue.destination.
-     // Pass the selected object to the new view controller.
-     }
-     */
     
 }
