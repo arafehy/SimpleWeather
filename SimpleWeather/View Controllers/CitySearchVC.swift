@@ -16,6 +16,7 @@ class CitySearchVC: UIViewController {
     private let openWeatherAPIKey = "5138c72c4ed19a1cc943e54e2b2ddb86"
     
     var forecast = [[String: Any]]()
+    let weather = WeatherAPICaller()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -42,48 +43,25 @@ class CitySearchVC: UIViewController {
             return
         }
         
-        // Build the OpenWeatherAPI URL with components
-        var components = URLComponents()
-        components.scheme = "https"
-        components.host = "api.openweathermap.org"
-        components.path = "/data/2.5/forecast"
-        components.queryItems = [
-            URLQueryItem(name: "q", value: city),
-            URLQueryItem(name: "units", value: "metric"),
-            URLQueryItem(name: "appid", value: openWeatherAPIKey)
-        ]
-        
-        // Get final OpenWeatherAPI URL
-        let url = components.url
-        
-        // Make request to API
-        let request = URLRequest(url: url!, cachePolicy: .reloadIgnoringLocalCacheData, timeoutInterval: 10)
-        let session = URLSession(configuration: .default, delegate: nil, delegateQueue: OperationQueue.main)
-        let task = session.dataTask(with: request) { (data, response, error) in
-            if let error = error {
-                print(error.localizedDescription)
-            }
-            else if let data = data {
-                let dataDictionary = try! JSONSerialization.jsonObject(with: data, options: []) as! [String: Any]
+        weather.getWeather(city: city!, success: { (dataDictionary) in
+            DispatchQueue.main.async {
                 if let forecastDictionary = dataDictionary["list"] as? [[String: Any]] {
                     self.forecast = forecastDictionary
-                    self.performSegue(withIdentifier: "toForecast", sender: nil)
-                } else {
-                    // Show user alert that city provided was not found
-                    let alertController = UIAlertController(title: "City Not Found",
-                                                            message: "\(city!) not found. Please enter a valid city.",
-                                                            preferredStyle: .alert)
-                    
-                    // Create an OK action
-                    let OKAction = UIAlertAction(title: "OK", style: .default)
-                    // Add the OK action to the alert controller
-                    alertController.addAction(OKAction)
-                    
-                    self.present(alertController, animated: true)
-                }
+                    self.performSegue(withIdentifier: "toForecast", sender: nil)}
             }
+        }) { (error) in
+            // Show user alert that city provided was not found
+            let alertController = UIAlertController(title: "City Not Found",
+                                                    message: "\(city!) not found. Please enter a valid city.",
+                preferredStyle: .alert)
+            
+            // Create an OK action
+            let OKAction = UIAlertAction(title: "OK", style: .default)
+            // Add the OK action to the alert controller
+            alertController.addAction(OKAction)
+            
+            self.present(alertController, animated: true)
         }
-        task.resume()
     }
     
     @IBAction func onSubmit(_ sender: UIButton) {
@@ -104,4 +82,3 @@ class CitySearchVC: UIViewController {
     
     
 }
-
