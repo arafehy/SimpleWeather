@@ -72,7 +72,7 @@ class ForecastVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
         
         // Get weather description
         let description = innerWeather["description"] as! String
-        cell.weatherDescriptionLabel.text = description
+        cell.weatherDescriptionLabel.text? = description.capitalized
         
         // Get date
         let dateTime = day["dt_txt"] as? String
