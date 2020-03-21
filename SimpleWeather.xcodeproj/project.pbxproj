@@ -43,6 +43,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		E0AD4F582426A4BB00C2AA72 /* View Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				E0D62133242087D900E1F6D2 /* CitySearchVC.swift */,
+				E0B91F6D24248C9F001ACD0F /* ForecastVC.swift */,
+			);
+			path = "View Controllers";
+			sourceTree = "<group>";
+		};
+		E0AD4F592426A4C600C2AA72 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				E0B91F6F24248E19001ACD0F /* DayCell.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		E0D62123242087D900E1F6D2 = {
 			isa = PBXGroup;
 			children = (
@@ -64,9 +81,8 @@
 			children = (
 				E0D6212F242087D900E1F6D2 /* AppDelegate.swift */,
 				E0D62131242087D900E1F6D2 /* SceneDelegate.swift */,
-				E0D62133242087D900E1F6D2 /* CitySearchVC.swift */,
-				E0B91F6D24248C9F001ACD0F /* ForecastVC.swift */,
-				E0B91F6F24248E19001ACD0F /* DayCell.swift */,
+				E0AD4F582426A4BB00C2AA72 /* View Controllers */,
+				E0AD4F592426A4C600C2AA72 /* Views */,
 				E0D62135242087D900E1F6D2 /* Main.storyboard */,
 				E0D6214B242090F900E1F6D2 /* WeatherAPICaller.swift */,
 				E0D62138242087DF00E1F6D2 /* Assets.xcassets */,
