@@ -27,8 +27,8 @@ class CitySearchVC: UIViewController {
     }
     
     func getWeather() {
-        let city = cityField.text
-        guard !city!.isEmpty else {
+        let city = cityField.text ?? ""
+        guard !city.isEmpty else {
             // Show user alert that city must be provided
             let alertController = UIAlertController(title: "No City Provided",
                                                     message: "Please enter a valid city.",
@@ -43,7 +43,7 @@ class CitySearchVC: UIViewController {
             return
         }
         
-        weather.getWeather(city: city!, success: { (dataDictionary) in
+        weather.getWeather(city: city, success: { (dataDictionary) in
             DispatchQueue.main.async {
                 if let forecastDictionary = dataDictionary["list"] as? [[String: Any]] {
                     self.forecast = forecastDictionary
@@ -52,7 +52,7 @@ class CitySearchVC: UIViewController {
         }) { (error) in
             // Show user alert that city provided was not found
             let alertController = UIAlertController(title: "City Not Found",
-                                                    message: "\(city!) not found. Please enter a valid city.",
+                                                    message: "\(city) not found. Please enter a valid city.",
                 preferredStyle: .alert)
             
             // Create an OK action
