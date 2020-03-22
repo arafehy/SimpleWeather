@@ -12,7 +12,6 @@ class ForecastVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     var forecast = [[String: Any]]()
     @IBOutlet weak var tableView: UITableView!
-    var index = 0   // Used to get weather forecast for each day when setting up each table view cell
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -54,8 +53,10 @@ class ForecastVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
         let cell = tableView.dequeueReusableCell(withIdentifier: "DayCell") as! DayCell
         
         // Since API returns weather every 3 hours, I am retrieving the weather every 24 hours from the first entry in the dictionary
-        let day = forecast[index]
-        index += 8
+        var day = forecast[0]
+        if indexPath.row != 0 {
+            day = forecast[indexPath.row * 8]
+        }
         let weather = day["weather"] as! [[String: Any]]
         let innerWeather = weather[0]
         
