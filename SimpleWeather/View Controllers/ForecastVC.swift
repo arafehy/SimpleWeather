@@ -11,6 +11,7 @@ import UIKit
 class ForecastVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     var forecast = [[String: Any]]()
+    var weatherIcons: [UIImage] = []
     @IBOutlet weak var tableView: UITableView!
     
     override func viewDidLoad() {
@@ -19,6 +20,28 @@ class ForecastVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
         tableView.dataSource = self
         tableView.delegate = self
         // Do any additional setup after loading the view.
+        
+        getWeatherIcons()
+    }
+    
+    func getWeatherIcons() {
+        var day: [String: Any] = [:]
+        for i in 0...4 {
+            day = forecast[i]
+            let weather = day["weather"] as! [[String: Any]]
+            let innerWeather = weather[0]
+            
+            // Get weather icon
+            let iconID = innerWeather["icon"] as! String
+            let urlString = "https://openweathermap.org/img/wn/\(iconID)@2x.png"
+            let weatherIconURL = URL(string: urlString)
+            let data = try? Data(contentsOf: weatherIconURL!)
+            
+            // Set weather icon
+            if let imageData = data {
+                weatherIcons.append(UIImage(data: imageData)!)
+            }
+        }
     }
     
     func getDayOfWeek(_ date:String) -> String {
@@ -60,16 +83,8 @@ class ForecastVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
         let weather = day["weather"] as! [[String: Any]]
         let innerWeather = weather[0]
         
-        // Get weather icon
-        let iconID = innerWeather["icon"] as! String
-        let urlString = "https://openweathermap.org/img/wn/\(iconID)@2x.png"
-        let weatherIconURL = URL(string: urlString)
-        let data = try? Data(contentsOf: weatherIconURL!)
-        
         // Set weather icon
-        if let imageData = data {
-            cell.weatherIcon.image = UIImage(data: imageData)
-        }
+        cell.weatherIcon.image = weatherIcons[indexPath.row]
         
         // Get weather description
         let description = innerWeather["description"] as! String
