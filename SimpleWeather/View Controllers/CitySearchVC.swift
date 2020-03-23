@@ -29,17 +29,7 @@ class CitySearchVC: UIViewController {
     func getWeather() {
         let city = cityField.text ?? ""
         guard !city.isEmpty else {
-            // Show user alert that city must be provided
-            let alertController = UIAlertController(title: "No City Provided",
-                                                    message: "Please enter a valid city.",
-                                                    preferredStyle: .alert)
-            
-            // Create an OK action
-            let OKAction = UIAlertAction(title: "OK", style: .default)
-            // Add the OK action to the alert controller
-            alertController.addAction(OKAction)
-            
-            self.present(alertController, animated: true)
+            showEmptyCityAlert()
             return
         }
         
@@ -47,21 +37,59 @@ class CitySearchVC: UIViewController {
             DispatchQueue.main.async {
                 if let forecastDictionary = dataDictionary["list"] as? [[String: Any]] {
                     self.forecast = forecastDictionary
-                    self.performSegue(withIdentifier: "toForecast", sender: nil)}
+                    self.performSegue(withIdentifier: "toForecast", sender: nil)
+                }
+                else {
+                    self.showCityNotFoundAlert()
+                }
             }
         }) { (error) in
-            // Show user alert that city provided was not found
-            let alertController = UIAlertController(title: "City Not Found",
-                                                    message: "\(city) not found. Please enter a valid city.",
-                preferredStyle: .alert)
-            
-            // Create an OK action
-            let OKAction = UIAlertAction(title: "OK", style: .default)
-            // Add the OK action to the alert controller
-            alertController.addAction(OKAction)
-            
-            self.present(alertController, animated: true)
+            DispatchQueue.main.async {
+                self.showUnknownProblemAlert()
+            }
         }
+    }
+    
+    func showEmptyCityAlert() {
+        // Show user alert that city must be provided
+        let alertController = UIAlertController(title: "No City Provided",
+                                                message: "Please enter a valid city.",
+                                                preferredStyle: .alert)
+        
+        // Create an OK action
+        let OKAction = UIAlertAction(title: "OK", style: .default)
+        // Add the OK action to the alert controller
+        alertController.addAction(OKAction)
+        
+        self.present(alertController, animated: true)
+    }
+    
+    func showCityNotFoundAlert() {
+        let city = cityField.text ?? "City"
+        // Show user alert that city provided was not found
+        let alertController = UIAlertController(title: "City Not Found",
+                                                message: "\(city) not found. Please enter a valid city.",
+            preferredStyle: .alert)
+        
+        // Create an OK action
+        let OKAction = UIAlertAction(title: "OK", style: .default)
+        // Add the OK action to the alert controller
+        alertController.addAction(OKAction)
+        
+        self.present(alertController, animated: true)
+    }
+    
+    func showUnknownProblemAlert() {
+         // Show user alert that an unknown error occured
+               let alertController = UIAlertController(title: "An error occurred",
+                                                       message: "Sorry. There was a problem connecting. Please check your connection and try again.",
+                   preferredStyle: .alert)
+               
+               // Create an OK action
+               let OKAction = UIAlertAction(title: "OK", style: .default)
+               // Add the OK action to the alert controller
+               alertController.addAction(OKAction)
+               self.present(alertController, animated: true)
     }
     
     @IBAction func onSubmit(_ sender: UIButton) {
