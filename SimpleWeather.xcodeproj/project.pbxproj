@@ -16,6 +16,7 @@
 		E0D62139242087DF00E1F6D2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E0D62138242087DF00E1F6D2 /* Assets.xcassets */; };
 		E0D6213C242087DF00E1F6D2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E0D6213A242087DF00E1F6D2 /* LaunchScreen.storyboard */; };
 		E0D6214C242090F900E1F6D2 /* WeatherAPICaller.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0D6214B242090F900E1F6D2 /* WeatherAPICaller.swift */; };
+		E0EA2E1F24285C030000EE92 /* Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0EA2E1E24285C030000EE92 /* Alert.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +31,7 @@
 		E0D6213B242087DF00E1F6D2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E0D6213D242087DF00E1F6D2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E0D6214B242090F900E1F6D2 /* WeatherAPICaller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherAPICaller.swift; sourceTree = "<group>"; };
+		E0EA2E1E24285C030000EE92 /* Alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alert.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,6 +58,7 @@
 			isa = PBXGroup;
 			children = (
 				E0B91F6F24248E19001ACD0F /* DayCell.swift */,
+				E0EA2E1E24285C030000EE92 /* Alert.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -169,6 +172,7 @@
 				E0B91F6E24248C9F001ACD0F /* ForecastVC.swift in Sources */,
 				E0D62130242087D900E1F6D2 /* AppDelegate.swift in Sources */,
 				E0D62132242087D900E1F6D2 /* SceneDelegate.swift in Sources */,
+				E0EA2E1F24285C030000EE92 /* Alert.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
