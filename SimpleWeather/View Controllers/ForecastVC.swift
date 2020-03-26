@@ -12,6 +12,7 @@ class ForecastVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     var forecast = [[String: Any]]()
     var weatherIcons: [UIImage] = []
+    let weather = WeatherAPICaller.sharedInstance
     @IBOutlet weak var tableView: UITableView!
     
     override func viewDidLoad() {
@@ -21,27 +22,8 @@ class ForecastVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
         tableView.delegate = self
         // Do any additional setup after loading the view.
         navigationController?.navigationBar.isHidden = false
-        getWeatherIcons()
-    }
-    
-    func getWeatherIcons() {
-        var day: [String: Any] = [:]
-        for i in 0...4 {
-            day = forecast[i]
-            let weather = day["weather"] as! [[String: Any]]
-            let innerWeather = weather[0]
-            
-            // Get weather icon
-            let iconID = innerWeather["icon"] as! String
-            let urlString = "https://openweathermap.org/img/wn/\(iconID)@2x.png"
-            let weatherIconURL = URL(string: urlString)
-            let data = try? Data(contentsOf: weatherIconURL!)
-            
-            // Set weather icon
-            if let imageData = data {
-                weatherIcons.append(UIImage(data: imageData)!)
-            }
-        }
+        
+        weatherIcons = weather.getWeatherIcons(forecast: forecast)
     }
     
     func getDayOfWeek(_ date:String) -> String {

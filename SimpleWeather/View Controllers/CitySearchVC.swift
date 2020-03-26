@@ -16,7 +16,7 @@ class CitySearchVC: UIViewController {
     private let openWeatherAPIKey = "5138c72c4ed19a1cc943e54e2b2ddb86"
     
     var forecast = [[String: Any]]()
-    let weather = WeatherAPICaller()
+    let weather = WeatherAPICaller.sharedInstance
     
     override func viewDidLoad() {
         super.viewDidLoad()
