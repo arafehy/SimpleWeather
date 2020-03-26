@@ -20,7 +20,7 @@ class ForecastVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
         tableView.dataSource = self
         tableView.delegate = self
         // Do any additional setup after loading the view.
-        
+        navigationController?.navigationBar.isHidden = false
         getWeatherIcons()
     }
     

@@ -26,6 +26,11 @@ class CitySearchVC: UIViewController {
         submitButton.layer.cornerRadius = 4
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        navigationController?.navigationBar.isHidden = true
+        cityField.text = ""
+    }
+    
     func getWeather() {
         let city = cityField.text ?? ""
         guard !city.isEmpty else {
@@ -35,7 +40,6 @@ class CitySearchVC: UIViewController {
         }
         
         weather.getWeather(city: city, success: { (dataDictionary) in
-            
             if let forecastDictionary = dataDictionary["list"] as? [[String: Any]] {
                 self.forecast = forecastDictionary
                 DispatchQueue.main.async {
@@ -58,15 +62,12 @@ class CitySearchVC: UIViewController {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "toForecast" {
-            if let navigationController = segue.destination as? UINavigationController {
-                if let forecastVC = navigationController.topViewController as? ForecastVC {
-                    forecastVC.forecast = forecast
-                    let city = cityField.text?.capitalized
-                    forecastVC.navigationItem.title = "\(city ?? "Random") Forecast"
-                }
+            if let forecastVC = segue.destination as? ForecastVC {
+                forecastVC.forecast = forecast
+                let city = cityField.text?.capitalized
+                forecastVC.navigationItem.title = "\(city ?? "Random") Forecast"
             }
         }
     }
-    
     
 }
