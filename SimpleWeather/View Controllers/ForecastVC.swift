@@ -55,29 +55,37 @@ class ForecastVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "DayCell") as! DayCell
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "DayCell") as? DayCell else {
+            return UITableViewCell()
+        }
         
         // Since API returns weather every 3 hours, I am retrieving the weather every 24 hours from the first entry in the dictionary
         var day = forecast[0]
         if indexPath.row != 0 {
             day = forecast[indexPath.row * 8]
         }
-        let weather = day["weather"] as! [[String: Any]]
+        guard let weather = day["weather"] as? [[String: Any]] else {
+            return UITableViewCell()
+        }
         let innerWeather = weather[0]
         
         // Set weather icon
         cell.weatherIcon.image = weatherIcons[indexPath.row]
         
         // Get weather description
-        let description = innerWeather["description"] as! String
-        cell.weatherDescriptionLabel.text? = description.capitalized
+        guard let description = innerWeather["description"] as? String else {
+            return UITableViewCell()
+        }
+        cell.weatherDescriptionLabel.text = description.capitalized
         
         // Get date
-        let dateTime = day["dt_txt"] as? String
-        let date = dateTime?.prefix(10)
+        guard let dateTime = day["dt_txt"] as? String else {
+            return UITableViewCell()
+        }
+        let date = dateTime.prefix(10)
         
         // Set cell label to day of week
-        let dayOfWeek = getDayOfWeek(String(date!))
+        let dayOfWeek = getDayOfWeek(String(date))
         cell.dayOfWeekLabel.text = dayOfWeek
         
         return cell
