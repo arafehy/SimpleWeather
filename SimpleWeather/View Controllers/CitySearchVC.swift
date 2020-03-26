@@ -20,7 +20,6 @@ class CitySearchVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
         
         // Round corners for submit button
         submitButton.layer.cornerRadius = 4
@@ -29,6 +28,11 @@ class CitySearchVC: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         navigationController?.navigationBar.isHidden = true
         cityField.text = ""
+        cityField.becomeFirstResponder()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        self.view.endEditing(true)
     }
     
     func getWeather() {
@@ -64,8 +68,8 @@ class CitySearchVC: UIViewController {
         if segue.identifier == "toForecast" {
             if let forecastVC = segue.destination as? ForecastVC {
                 forecastVC.forecast = forecast
-                let city = cityField.text?.capitalized
-                forecastVC.navigationItem.title = "\(city ?? "Random") Forecast"
+                let city = cityField.text?.capitalized ?? "Random"
+                forecastVC.navigationItem.title = "\(city) Forecast"
             }
         }
     }
