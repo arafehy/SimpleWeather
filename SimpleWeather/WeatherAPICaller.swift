@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import UIKit.UIImage
 
 class WeatherAPICaller {
     static let sharedInstance = WeatherAPICaller()
