@@ -24,30 +24,6 @@ class ForecastVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
         navigationController?.navigationBar.isHidden = false
     }
     
-    func getDayOfWeek(_ date:String) -> String {
-        let formatter  = DateFormatter()
-        formatter.dateFormat = "yyyy-MM-dd"
-        guard let date = formatter.date(from: date) else { return "Not a date" }
-        let myCalendar = Calendar(identifier: .gregorian)
-        let weekDay = myCalendar.component(.weekday, from: date)
-        switch weekDay {
-        case 1:
-            return "Sunday"
-        case 2:
-            return "Monday"
-        case 3:
-            return "Tuesday"
-        case 4:
-            return "Wednesday"
-        case 5:
-            return "Thursday"
-        case 6:
-            return "Friday"
-        default:
-            return "Saturday"
-        }
-    }
-    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 5
     }
