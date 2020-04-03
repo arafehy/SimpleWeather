@@ -13,8 +13,6 @@ class CitySearchVC: UIViewController {
     @IBOutlet weak var cityField: UITextField!
     @IBOutlet weak var submitButton: UIButton!
     
-    private let openWeatherAPIKey = "5138c72c4ed19a1cc943e54e2b2ddb86"
-    
     var forecast = [[String: Any]]()
     let weather = WeatherAPICaller.sharedInstance
     
