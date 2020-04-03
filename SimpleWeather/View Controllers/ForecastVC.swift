@@ -80,7 +80,7 @@ class ForecastVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
         let date = dateTime.prefix(10)
         
         // Set cell label to day of week
-        let dayOfWeek = getDayOfWeek(String(date))
+        let dayOfWeek = Helpers.getDayOfWeek(String(date))
         cell.dayOfWeekLabel.text = dayOfWeek
         
         // Set weather icon

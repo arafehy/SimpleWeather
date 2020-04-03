@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E07A425E2435C686000133CE /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = E07A425D2435C686000133CE /* Helpers.swift */; };
 		E0B91F6E24248C9F001ACD0F /* ForecastVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0B91F6D24248C9F001ACD0F /* ForecastVC.swift */; };
 		E0B91F7024248E19001ACD0F /* DayCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0B91F6F24248E19001ACD0F /* DayCell.swift */; };
 		E0D62130242087D900E1F6D2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0D6212F242087D900E1F6D2 /* AppDelegate.swift */; };
@@ -20,6 +21,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		E07A425D2435C686000133CE /* Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helpers.swift; sourceTree = "<group>"; };
 		E0B91F6D24248C9F001ACD0F /* ForecastVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForecastVC.swift; sourceTree = "<group>"; };
 		E0B91F6F24248E19001ACD0F /* DayCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayCell.swift; sourceTree = "<group>"; };
 		E0D6212C242087D900E1F6D2 /* SimpleWeather.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SimpleWeather.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -87,6 +89,7 @@
 				E0AD4F582426A4BB00C2AA72 /* View Controllers */,
 				E0AD4F592426A4C600C2AA72 /* Views */,
 				E0D6214B242090F900E1F6D2 /* WeatherAPICaller.swift */,
+				E07A425D2435C686000133CE /* Helpers.swift */,
 				E0D62135242087D900E1F6D2 /* Main.storyboard */,
 				E0D6213A242087DF00E1F6D2 /* LaunchScreen.storyboard */,
 				E0D62138242087DF00E1F6D2 /* Assets.xcassets */,
@@ -173,6 +176,7 @@
 				E0D62130242087D900E1F6D2 /* AppDelegate.swift in Sources */,
 				E0D62132242087D900E1F6D2 /* SceneDelegate.swift in Sources */,
 				E0EA2E1F24285C030000EE92 /* Alert.swift in Sources */,
+				E07A425E2435C686000133CE /* Helpers.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
