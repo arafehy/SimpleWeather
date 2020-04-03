@@ -11,7 +11,7 @@ import UIKit
 class ForecastVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     var forecast = [[String: Any]]()
-    var weatherIcons: [UIImage] = []
+    let weatherIconsCache = NSCache<NSString, UIImage>()
     let weather = WeatherAPICaller.sharedInstance
     @IBOutlet weak var tableView: UITableView!
     
@@ -22,8 +22,6 @@ class ForecastVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
         tableView.delegate = self
         
         navigationController?.navigationBar.isHidden = false
-        
-        weatherIcons = weather.getWeatherIcons(forecast: forecast)
     }
     
     func getDayOfWeek(_ date:String) -> String {
@@ -69,9 +67,6 @@ class ForecastVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
         }
         let innerWeather = weather[0]
         
-        // Set weather icon
-        cell.weatherIcon.image = weatherIcons[indexPath.row]
-        
         // Get weather description
         guard let description = innerWeather["description"] as? String else {
             return UITableViewCell()
@@ -88,7 +83,36 @@ class ForecastVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
         let dayOfWeek = getDayOfWeek(String(date))
         cell.dayOfWeekLabel.text = dayOfWeek
         
+        // Set weather icon
+        let iconID = innerWeather["icon"] as! String
+        let urlString = "https://openweathermap.org/img/wn/\(iconID)@2x.png"
+        guard let url = URL(string: urlString) else {
+            return UITableViewCell()
+        }
+        if let cachedIcon = weatherIconsCache.object(forKey: url.absoluteString as NSString) {
+            cell.weatherIcon.image = cachedIcon
+        }
+        else {
+            cell.weatherIcon.getIcon(url: url)
+        }
+        
         return cell
     }
     
+}
+
+
+extension UIImageView {
+    func getIcon(url: URL) {
+        URLSession.shared.dataTask(with: url) { (data, response, error) in
+            DispatchQueue.global(qos: .background).async {
+                guard let data = data else {
+                    return
+                }
+                DispatchQueue.main.async {
+                    self.image = UIImage(data: data)
+                }
+            }
+        }.resume()
+    }
 }

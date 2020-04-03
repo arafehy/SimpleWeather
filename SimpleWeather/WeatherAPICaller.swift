@@ -44,26 +44,4 @@ class WeatherAPICaller {
         task.resume()
     }
     
-    func getWeatherIcons(forecast: [[String: Any]]) -> [UIImage] {
-        var day: [String: Any] = [:]
-        var weatherIcons: [UIImage] = []
-        for i in 0...4 {
-            day = forecast[i]
-            let weather = day["weather"] as! [[String: Any]]
-            let innerWeather = weather[0]
-            
-            // Get weather icon
-            let iconID = innerWeather["icon"] as! String
-            let urlString = "https://openweathermap.org/img/wn/\(iconID)@2x.png"
-            let weatherIconURL = URL(string: urlString)
-            let data = try? Data(contentsOf: weatherIconURL!)
-            
-            // Set weather icon
-            if let imageData = data {
-                weatherIcons.append(UIImage(data: imageData)!)
-            }
-        }
-        return weatherIcons
-    }
-    
 }
