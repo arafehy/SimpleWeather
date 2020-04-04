@@ -9,8 +9,6 @@
 import Foundation
 
 class Helpers {
-    static let sharedInstance = Helpers()
-    
     static func getDayOfWeek(_ date:String) -> String {
         let formatter  = DateFormatter()
         formatter.dateFormat = "yyyy-MM-dd"
