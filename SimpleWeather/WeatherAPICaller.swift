@@ -13,7 +13,7 @@ class WeatherAPICaller {
     
     private let openWeatherAPIKey = "5138c72c4ed19a1cc943e54e2b2ddb86"
     
-    func getWeather(city: String, success: @escaping ([String: Any]) -> (), failure: @escaping (Error) -> ()) {
+    func buildURL(city: String) -> URL {
         // Build the OpenWeatherAPI URL with components
         var components = URLComponents()
         components.scheme = "https"
@@ -26,10 +26,14 @@ class WeatherAPICaller {
         ]
         
         // Get final OpenWeatherAPI URL
-        let url = components.url
+        return components.url!
+    }
+    
+    func getWeather(city: String, success: @escaping ([String: Any]) -> (), failure: @escaping (Error) -> ()) {
+        let url = buildURL(city: city)
         
         // Make request to API
-        let request = URLRequest(url: url!, cachePolicy: .reloadIgnoringLocalCacheData, timeoutInterval: 10)
+        let request = URLRequest(url: url, cachePolicy: .reloadIgnoringLocalCacheData, timeoutInterval: 10)
         let session = URLSession(configuration: .default, delegate: nil, delegateQueue: OperationQueue.main)
         let task = session.dataTask(with: request) { (data, response, error) in
             if let error = error {
