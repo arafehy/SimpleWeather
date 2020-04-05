@@ -8,12 +8,17 @@
 
 import UIKit
 
+/// The initial view controller used to get the forecast for a city.
 class CitySearchVC: UIViewController {
     
+    /// The text field to enter the name of a city.
     @IBOutlet weak var cityField: UITextField!
+    /// The submit button.
     @IBOutlet weak var submitButton: UIButton!
     
+    /// The weather forecast obtained from OpenWeatherMap API.
     var forecast = [[String: Any]]()
+    /// The shared instance of WeatherAPICaller.
     let weather = WeatherAPICaller.sharedInstance
     
     override func viewDidLoad() {
@@ -33,6 +38,7 @@ class CitySearchVC: UIViewController {
         self.view.endEditing(true)
     }
     
+    /// Gets the weather forecast and shows alerts for empty city field, city not found, and other errors (i.e. no internet connection)
     func getWeather() {
         let city = cityField.text ?? ""
         guard !city.isEmpty else {
@@ -58,6 +64,8 @@ class CitySearchVC: UIViewController {
         }
     }
     
+    /// Calls getWeather() when the submit button is pressed.
+    /// - Parameter sender: The submit button below the city field.
     @IBAction func onSubmit(_ sender: UIButton) {
         getWeather()
     }

@@ -8,10 +8,14 @@
 
 import UIKit
 
+/// The view controller to display the forecast.
 class ForecastVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
+    /// The weather forecast obtained from OpenWeatherMap API.
     var forecast = [[String: Any]]()
+    /// A cache for the weather icons obtained from OpenWeatherMap.
     let weatherIconsCache = NSCache<NSString, UIImage>()
+    /// The shared instance of WeatherAPICaller.
     let weather = WeatherAPICaller.sharedInstance
     @IBOutlet weak var tableView: UITableView!
     
@@ -79,6 +83,8 @@ class ForecastVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
 
 extension UIImageView {
+    /// Sets the image of a UIImageView to the weather icon obtained from OpenWeatherMap
+    /// - Parameter url: The URL of the weather icon from OpenWeatherMap
     func getIcon(url: URL) {
         URLSession.shared.dataTask(with: url) { (data, response, error) in
             DispatchQueue.global(qos: .background).async {

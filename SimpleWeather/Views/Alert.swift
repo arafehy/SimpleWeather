@@ -9,8 +9,11 @@
 import Foundation
 import UIKit
 
+/// An class containing functions to show alerts.
 class Alert {
     
+    /// Presents an alert when the city field is empty and submit is clicked.
+    /// - Parameter on: The view controller where the alert should appear.
     func showEmptyCityAlert(on: UIViewController) {
         // Show user alert that city must be provided
         let alertController = UIAlertController(title: "No City Provided",
@@ -27,6 +30,10 @@ class Alert {
         }
     }
     
+    /// Presents an alert when a city is not found on OpenWeatherMap.
+    /// - Parameters:
+    ///   - city: The city requested by the user.
+    ///   - on: The view controller where the alert should appear.
     func showCityNotFoundAlert(city: String, on: UIViewController) {
         // Show user alert that city provided was not found
         let alertController = UIAlertController(title: "City Not Found",
@@ -43,6 +50,8 @@ class Alert {
         }
     }
     
+    /// Presents an alert when an error occurs getting the forecast from OpenWeatherMap.
+    /// - Parameter on: The view controller where the alert should appear.
     func showUnknownProblemAlert(on: UIViewController) {
         // Show user alert that an unknown error occured
         let alertController = UIAlertController(title: "An error occurred",

@@ -8,10 +8,14 @@
 
 import UIKit
 
+/// The table view cell to display the forecast for a day.
 class DayCell: UITableViewCell {
-
+    
+    /// The forecast's weather icon.
     @IBOutlet weak var weatherIcon: UIImageView!
+    /// The label for the day of the week.
     @IBOutlet weak var dayOfWeekLabel: UILabel!
+    /// The label for the description of the forecast.
     @IBOutlet weak var weatherDescriptionLabel: UILabel!
     
     override func awakeFromNib() {
