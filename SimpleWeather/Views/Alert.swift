@@ -9,8 +9,8 @@
 import Foundation
 import UIKit
 
-/// An class containing functions to show alerts.
-class Alert {
+/// A struct containing functions to show alerts.
+struct Alert {
     
     /// Presents an alert when the city field is empty and submit is clicked.
     /// - Parameter on: The view controller where the alert should appear.

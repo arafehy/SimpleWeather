@@ -8,8 +8,8 @@
 
 import Foundation
 
-/// Class for helper functions.
-class Helpers {
+/// Struct for helper functions.
+struct Helpers {
     /// Returns the day of the week given a date.
     /// - Parameter date: A date in the format "yyyy-MM-dd".
     /// - Returns: The day of the week for the given date.
